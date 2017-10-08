@@ -13,7 +13,11 @@ function getAddress(ad1, ct, st, zp){
     },
     success: function(response){
       console.log(response);
-     $("#address").text(response.result.addressMatches[0].matchedAddress);
+      if(response.result.addressMatches[0] != null) { 
+        $("#address").text(response.result.addressMatches[0].matchedAddress);
+      } else {
+        $("#address").text("Address Not Found: Please re-enter address"); 
+      }
     },
     error: function(response) {
       console.log(response);
