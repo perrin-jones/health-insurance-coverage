@@ -20,7 +20,7 @@ function getAddress(ad1, ct, st, zp){
     },
     error: function(response) {
       console.log(response);
-     $("#address").text("Address Not Found: Please re-enter address");
+     $("#address").text("Connection to API Failed: Try Search Again Later");
     }
  });
 }
