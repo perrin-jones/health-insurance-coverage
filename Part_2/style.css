@@ -64,7 +64,7 @@ body {
  */
 .masthead-brand {
   margin-top: 10px;
-  margin-bottom: 100px;
+  margin-bottom: 40px;
 }
 
 .masthead-nav > li {
@@ -160,14 +160,4 @@ body {
   .cover-container {
     width: 700px;
   }
-}
-
-select {
-    border:1px solid #ccc;
-    vertical-align: top;
-}
-input, select{
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
 }
