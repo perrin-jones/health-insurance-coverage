@@ -2,10 +2,9 @@ var KEY = 'f36d09f45b99bbd15ea79fc4b85882d97d1a44a3';
 
 function getAddress(ad1, ct, st, zp){
  $.ajax({
-     url: "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress?format=jsonp",
+     url: "https://geocoding.geo.census.gov/geocoder/geographies/onelineaddress?format=jsonp",
     dataType: "jsonp",
     data: {
-       format: "json",
        benchmark : "Public_AR_Census2010",
        vintage : "Census2010_Census2010",
        layers: "14",
