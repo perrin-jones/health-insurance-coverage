@@ -64,7 +64,7 @@ body {
  */
 .masthead-brand {
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 100px;
 }
 
 .masthead-nav > li {
@@ -76,7 +76,7 @@ body {
 .masthead-nav > li > a {
   padding-right: 0;
   padding-left: 0;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: bold;
   color: #fff; /* IE8 proofing */
   color: rgba(255,255,255,.75);
@@ -162,3 +162,12 @@ body {
   }
 }
 
+select {
+    border:1px solid #ccc;
+    vertical-align: top;
+}
+input, select{
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
