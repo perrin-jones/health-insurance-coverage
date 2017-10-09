@@ -5,7 +5,7 @@ var years;
 
 function getInsuranceInformation(year, age, income, sex) {
  $.ajax({
-    url: "https://api.census.gov/data/timeseries/healthins/sahie?get=PCTUI_PT,PCTUI_MOE&for=county:" + countyCode + "&in=state:" + stateCode,
+    url: "https://api.census.gov/data/timeseries/healthins/sahie?get=NIC_PT,NIC_MOE,NUI_PT,NUI_MOE,PCTIC_PT,PCTIC_MOE,PCTUI_PT,PCTUI_MOE&for=county:" + countyCode + "&in=state:" + stateCode,
      
     data: {
        time: year,
@@ -17,15 +17,19 @@ function getInsuranceInformation(year, age, income, sex) {
     success: function(response){
       console.log(response);
       if(typeof response != 'undefined') {
-          $("#results").text("Percent Uninsured: " + response[1][0] + "% with a margin of error of +/-" + response[1][1] + "% for parameters selected");
+          var num = parseInt(response[1][0]) + parseInt(response[1][2]);
+          var moe = (parseInt(response[1][0])*(.01)*parseInt(response[1][1]) + parseInt(response[1][2])*(.01)*parseInt(response[1][3]))/num;
+          $("#address1").text("Numer of People: " + num + " with a margin of error of +/-" + moe + "% for parameters selected");
+          $("#address2").text("Insured: " + response[1][4] + "% with a margin of error of +/-" + response[1][5] + "% for parameters selected");
+          $("#address3").text("Uninsured: " + response[1][6] + "% with a margin of error of +/-" + response[1][7] + "% for parameters selected");
       } else {
-          $("#address").text("There is no data for those given parameters. Please select new parameters and select again.");        
+          $("#address1").text("There is no data for those given parameters. Please select new parameters and select again.");        
       }
       
     },
     error: function(response) {
       console.log(response);
-     $("#address").text("Connection to US Census API Failed: Try Search Again Later");
+     $("#address1").text("Connection to US Census API Failed: Try Search Again Later");
     }
  });
 }
@@ -48,12 +52,12 @@ function getAddress(ad1, ct, st, zp, year, age, income, sex){
         stateCode = response.result.addressMatches["0"].geographies["Census Blocks"]["0"].STATE;
         getInsuranceInformation(year, age, income, sex);
       } else {
-        $("#address").text("Address Not Found: Please re-enter address"); 
+        $("#address1").text("Address Not Found: Please re-enter address"); 
       }
     },
     error: function(response) {
       console.log(response);
-     $("#address").text("Connection to Address API Failed: Try Search Again Later");
+     $("#address1").text("Connection to Address API Failed: Try Search Again Later");
     }
  });
 }
