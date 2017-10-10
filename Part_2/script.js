@@ -3,6 +3,32 @@ var countyCode;
 var stateCode;
 var years;
 
+// Return an array of the selected opion values
+// select is an HTML select element
+//Modified from https://stackoverflow.com/posts/5867262
+//Does not work, so function has been taken out
+function getSelectValues(select) {
+  var result = [];
+  var options = select && select.options;
+  var opt;
+
+  for (var i=0, iLen=options.length; i<iLen; i++) {
+    opt = options[i];
+
+    if (opt.selected) {
+      result.push(opt.value || opt.text);
+    }
+  }
+  return result;
+}
+
+//Did not work, so taken out to produce working model
+//function goThroughVar(year,age,income,sex){
+//  for(int i = 0; i < getSelectValues(year).length; i++) {
+//      getInsuranceInformation(year[i],age,sex,income);
+//  }
+//}
+
 function getInsuranceInformation(year, age, income, sex) {
  $.ajax({
     url: "https://api.census.gov/data/timeseries/healthins/sahie?get=NIC_PT,NIC_MOE,NUI_PT,NUI_MOE,PCTIC_PT,PCTIC_MOE,PCTUI_PT,PCTUI_MOE&for=county:" + countyCode + "&in=state:" + stateCode,
@@ -50,6 +76,7 @@ function getAddress(ad1, ct, st, zp, year, age, income, sex){
       if(response.result.addressMatches[0] != null) { 
         countyCode = response.result.addressMatches["0"].geographies["Census Blocks"]["0"].COUNTY;
         stateCode = response.result.addressMatches["0"].geographies["Census Blocks"]["0"].STATE;
+        //goThroughVar(year,age,income,sex);
         getInsuranceInformation(year, age, income, sex);
       } else {
         $("#address1").text("Address Not Found: Please re-enter address"); 
